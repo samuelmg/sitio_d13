@@ -7,7 +7,7 @@
     <title>Contacto</title>
 </head>
 <body>
-    <h1>Formulario de Contacto</h1>
+    <h1>Formulario de Contacto para {{ $tipo_usuario }}</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -21,6 +21,12 @@
 
     <form action="/guardar-formulario" method="POST">
         @csrf
+
+        @if($tipo_usuario == 'cliente')
+            <label for="no_cliente">No. de Cliente:</label><br>
+            <input type="text" name="no_cliente" value="{{ old('no_cliente') }}" id="no_cliente"><br>
+        @endif
+
         <label for="nombre">Nombre:</label><br>
         <input type="text" name="nombre" value="{{ old('nombre') }}"><br>
 
