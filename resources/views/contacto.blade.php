@@ -22,17 +22,17 @@
     <form action="/guardar-formulario" method="POST">
         @csrf
         <label for="nombre">Nombre:</label><br>
-        <input type="text" name="nombre"><br>
+        <input type="text" name="nombre" value="{{ old('nombre') }}"><br>
 
         <label for="correo">Correo:</label><br>
-        <input type="email" name="correo" id="">
+        <input type="email" name="correo" id="correo" value="{{ old('correo') }}">
         @error('correo')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <br>
 
         <label for="mensaje">Mensaje:</label><br>
-        <textarea name="mensaje" cols="30" rows="4"></textarea><br>
+        <textarea name="mensaje" cols="30" rows="4">{{ old('mensaje') }}</textarea><br>
 
         <input type="submit" value="Enviar">
     </form>
