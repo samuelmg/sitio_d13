@@ -14,3 +14,13 @@ Route::post('/guardar-formulario', [ContactoController::class, 'guardarFormulari
 Route::get('/mensajes', [ContactoController::class, 'listado']);
 
 Route::resource('noticia', NoticiaController::class)->parameters(['noticia' => 'noticia']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
