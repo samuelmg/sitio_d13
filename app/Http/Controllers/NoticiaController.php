@@ -6,6 +6,7 @@ use App\Models\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class NoticiaController extends Controller implements HasMiddleware
 {
@@ -45,6 +46,9 @@ class NoticiaController extends Controller implements HasMiddleware
             'categoria' => ['required'],
         ]);
 
+        $request->merge([
+            'user_id' => Auth::id(), // or auth()->id()
+        ]);
         $noticia = Noticia::create($request->all());
 
         return redirect()->route('noticia.index');
