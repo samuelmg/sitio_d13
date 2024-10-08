@@ -10,4 +10,14 @@ class Noticia extends Model
     use HasFactory;
     protected $fillable = ['titulo', 'noticia', 'fecha', 'categoria'];
     //protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categorias()
+    {
+        return $this->belongsToMany(Categoria::class);
+    }
 }
