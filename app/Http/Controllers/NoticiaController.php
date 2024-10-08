@@ -46,10 +46,13 @@ class NoticiaController extends Controller implements HasMiddleware
             'categoria' => ['required'],
         ]);
 
-        $request->merge([
-            'user_id' => Auth::id(), // or auth()->id()
-        ]);
-        $noticia = Noticia::create($request->all());
+        // $request->merge([
+        //     'user_id' => Auth::id(), // or auth()->id()
+        // ]);
+
+        Auth::user()->noticias()->create($request->all());
+
+        // $noticia = Noticia::create($request->all());
 
         return redirect()->route('noticia.index');
     }
