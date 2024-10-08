@@ -20,9 +20,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('material/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -149,12 +146,29 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item d-flex align-items-center">
-              <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
+            @guest
+                <li class="nav-item d-flex align-items-center">
+                  <a href="{{ route('login') }}" class="nav-link text-body font-weight-bold px-0">
+                    <i class="fa fa-user me-sm-1"></i>
+                    <span class="d-sm-inline d-none">INGRESAR</span>
+                  </a>
+                </li>
+            @endguest
+
+            @auth
+              <li class="nav-item d-flex align-items-center">
+                <a href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                class="nav-link text-body font-weight-bold px-0"
+                >
+                  <i class="fa fa-user me-sm-1"></i>
+                  <span class="d-sm-inline d-none">SALIR</span>
+                </a>
+              </li>
+            <form method="POST" action="{{ route('logout') }}" id="logout-form">
+              @csrf
+            </form>
+            @endauth
           </ul>
         </div>
       </div>
@@ -335,6 +349,9 @@
     </div>
   </div>
   <!--   Core JS Files   -->
+
+  
+
   <script src="/material/js/core/popper.min.js"></script>
   <script src="/material/js/core/bootstrap.min.js"></script>
   <script src="/material/js/plugins/perfect-scrollbar.min.js"></script>
