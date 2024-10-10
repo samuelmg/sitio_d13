@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -31,7 +32,9 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        return view('noticias.create-noticia');
+        return view('noticias.create-noticia', [
+            'categorias' => Categoria::all(),
+        ]);
     }
 
     /**
@@ -43,16 +46,18 @@ class NoticiaController extends Controller implements HasMiddleware
             'titulo' => ['required', 'max:255'],
             'fecha' => ['required', 'date'],
             'noticia' => ['required'],
-            'categoria' => ['required'],
+            'categorias' => ['required'],
         ]);
 
-        // $request->merge([
-        //     'user_id' => Auth::id(), // or auth()->id()
-        // ]);
+        
+        // Auth::user()->noticias()->create($request->all());
+        
+        $request->merge([
+            'user_id' => Auth::id(), // or auth()->id()
+        ]);
+        $noticia = Noticia::create($request->all());
 
-        Auth::user()->noticias()->create($request->all());
-
-        // $noticia = Noticia::create($request->all());
+        $noticia->categorias()->attach($request->categorias);
 
         return redirect()->route('noticia.index');
     }
