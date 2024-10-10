@@ -9,7 +9,7 @@ class Categoria extends Model
 {
     use HasFactory;
     protected $fillable = ['tag'];
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public function noticias()
     {
