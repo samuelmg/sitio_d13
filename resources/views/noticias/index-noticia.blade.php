@@ -25,7 +25,7 @@
                         {{ $noticia->titulo }}
                     </a>
                 </td>
-                <td>{{ $noticia->fecha }}</td>
+                <td>{{ $noticia->fecha->format('d/m/Y') }}</td>
                 <td>
                     @foreach($noticia->categorias as $categoria)
                         {{ $categoria->tag }}, 

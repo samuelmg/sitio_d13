@@ -23,7 +23,9 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $noticias = Noticia::all();
+        $noticias = Noticia::with('categorias')
+            ->with('user:id,name,email')
+            ->get();
         return view('noticias.index-noticia', compact('noticias'));
     }
 
