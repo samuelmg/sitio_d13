@@ -19,7 +19,12 @@ class DatabaseSeeder extends Seeder
 
         User::factory()
             ->withPersonalTeam()
-            ->has(Noticia::factory()->count(5))
+            ->has(
+                Noticia::factory()
+                    ->has(
+                        Categoria::factory()->count(3)
+                    )
+                ->count(5))
             ->create([
                 'name' => 'Test User',
                 'email' => 'test@example.com',
