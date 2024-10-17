@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class NoticiaController extends Controller implements HasMiddleware
 {
@@ -77,6 +78,8 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function edit(Noticia $noticia)
     {
+        Gate::authorize('editar-noticia', $noticia);
+        
         $categorias = Categoria::all();
         return view('noticias.edit-noticia', compact('noticia', 'categorias'));
     }
@@ -86,6 +89,8 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Noticia $noticia)
     {
+        Gate::authorize('editar-noticia', $noticia);
+
         $noticia->update($request->all());
         $noticia->categorias()->sync($request->categorias);
 
