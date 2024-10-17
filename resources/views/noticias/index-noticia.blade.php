@@ -1,5 +1,5 @@
 <x-layout>
-    <h1>Mensajes</h1>
+    <h1>Noticias</h1>
 
     <p>
         <a href="{{ route('noticia.create') }}">Agregar Noticia</a>
@@ -33,7 +33,9 @@
                 </td>
                 <td>{{ $noticia->user->name }}</td>
                 <td>
-                    <a href="{{ route('noticia.edit', $noticia) }}">Editar</a>
+                    @can('update', $noticia)
+                        <a href="{{ route('noticia.edit', $noticia) }}">Editar</a>
+                    @endcan
                 </td>
             </tr>
             @endforeach

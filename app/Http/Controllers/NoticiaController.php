@@ -78,7 +78,7 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function edit(Noticia $noticia)
     {
-        Gate::authorize('editar-noticia', $noticia);
+        Gate::authorize('update', $noticia);
         
         $categorias = Categoria::all();
         return view('noticias.edit-noticia', compact('noticia', 'categorias'));
@@ -89,7 +89,7 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Noticia $noticia)
     {
-        Gate::authorize('editar-noticia', $noticia);
+        Gate::authorize('update', $noticia);
 
         $noticia->update($request->all());
         $noticia->categorias()->sync($request->categorias);
