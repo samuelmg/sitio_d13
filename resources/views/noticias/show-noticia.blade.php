@@ -17,6 +17,25 @@
             <li>Categoría: {{ $noticia->categoria }}</li>
         </ul>
     </p>
+    <hr>
+    <h2>Archivos</h2>
+    <ul>
+        @foreach ($noticia->archivos as $archivo)
+            <li>
+                <a href="{{ route('descargar', $archivo) }}">
+                    {{ $archivo->nombre_original }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+
+    @foreach ($noticia->archivos as $archivo)
+        <img src="{{ asset('/storage/'.$archivo->ruta) }}" alt="prueba" width="400">
+    @endforeach
+
+
+
+    <hr>
     <a href="{{ route('noticia.edit', $noticia) }}">Editar</a><br>
 
     <form action="{{ route('noticia.destroy', $noticia) }}" method="POST">

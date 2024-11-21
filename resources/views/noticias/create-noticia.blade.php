@@ -9,7 +9,7 @@
 <body>
     <h1>Crear noticia</h1>
 
-    <form action="{{ route('noticia.store') }}" method="POST">
+    <form action="{{ route('noticia.store') }}" method="POST" enctype='multipart/form-data'>
         @csrf
 
         <label for="titulo">Titulo:</label><br>
@@ -29,6 +29,9 @@
                 </option>
             @endforeach
         </select>
+
+        <label for="archivo">Archivo:</label><br>
+        <input type="file" name="archivo" id="imagen"><br>
 
         <input type="submit" value="Enviar">
     </form>

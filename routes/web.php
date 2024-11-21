@@ -13,6 +13,8 @@ Route::get('/contacto/{tipo_usuario?}', [ContactoController::class, 'formularioC
 Route::post('/guardar-formulario', [ContactoController::class, 'guardarFormulario']);
 Route::get('/mensajes', [ContactoController::class, 'listado']);
 
+Route::get('/descarga/{archivo}', [NoticiaController::class, 'descargar'])
+    ->name('descargar');
 Route::resource('noticia', NoticiaController::class)
     ->parameters(['noticia' => 'noticia']);
     //->middleware('auth');
